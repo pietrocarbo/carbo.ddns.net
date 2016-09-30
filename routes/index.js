@@ -23,11 +23,9 @@ router.get('/getCityWeather', function(req, res, next) {
 		var regexp = '^' + req.query.name + '$';
 		collection.findOne({'name': {$regex: regexp, $options: 'i' }}, function(err, doc){
 			if(err) return;
-							
-			var city;
+						
 			if (!doc) {
-				city = 'Citta\' non trovata'; 
-				res.render('index', { title: 'Home - CarboWeb', city});
+				res.render('index', { title: 'Home - CarboWeb', forecast: 'Citta\' non trovata!'});
 
 			} else {
 				console.log('Risultato query db: ' + doc.name + ' -> ' + doc.id);
