@@ -1,0 +1,10 @@
+<h1>Pagina Principale</h1>
+<form action="/getCityWeather" method="get">
+<input type="text" placeholder="New York, US" id="name" name="name">
+<button type="submit">Richiedi previsioni</button>
+{{#forecast}}
+<ul>
+	<li>Orario: {{dt_txt}} <tab2>Condizione: {{weather.[0].description}}</tab2> <tab1>Temperatura: {{main.temp}}</tab1></li>
+</ul>
+{{/forecast}}
+</form>
