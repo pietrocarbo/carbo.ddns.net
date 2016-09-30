@@ -3,6 +3,10 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+tab1 { padding-left: 4em; }
+tab2 { padding-left: 8em; }
+tab3 { padding-left: 12em; }
+
 a {
   color: #00B7FF;
 }
