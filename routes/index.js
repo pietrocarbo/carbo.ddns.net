@@ -25,7 +25,7 @@ router.get('/getCityWeather', function(req, res, next) {
 			if(err) return;
 						
 			if (!doc) {
-				res.render('index', { title: 'Home - CarboWeb', forecast: 'Citta\' non trovata!'});
+				res.render('index', { title: 'Home - CarboWeb', forecast: null });
 
 			} else {
 				console.log('Risultato query db: ' + doc.name + ' -> ' + doc.id);
@@ -43,7 +43,7 @@ module.exports = router;
 
 function requestWeather(cityID,res){
 	var url = 'http://api.openweathermap.org/data/2.5/forecast?APPID=' + APIKEY 
-			+ '&id=' + cityID + '&units=metric&lang=it';
+			+ '&id=' + cityID + '&units=metric&lang=en';
 
 	var opt = {
 		host: 'api.openweathermap.org',
