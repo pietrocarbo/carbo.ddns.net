@@ -1,14 +1,14 @@
 var express = require('express');
 var http = require('http');
-var fs = require('fs');
 var router = express.Router();
-var MongoClient = require('mongodb').MongoClient
+var fs = require('fs');
+var MongoClient = require('mongodb').MongoClient;
 var lineReader = require('line-reader');
 var URLlocal = 'mongodb://localhost:27017/test';
 var URLremote = 'mongodb://ammiraglio:mozzo94@64.137.214.77:27017/webData?authSource=admin';
 var APIKEY = 'ab396c8c6739406ccc15fcfb13190288';
 var request = require('request');
-var City = require('../models/user.js');
+var db = require('../models/db');
 
 /* Display home page. */
 router.get('/', function (req, res, next) {
@@ -57,12 +57,9 @@ router.get('/getCityWeather', function (req, res, next) {
 
                 if (!doc) {
                     res.render('forecast', { title: 'Home - CarboWeb', forecast: null });
-
                 } else {
                     console.log('Risultato query db: ' + doc.name + ' -> ' + doc.id);
                     requestWeatherbyID(doc.id, res);
-
-
                 }
             });
             db.close();
@@ -76,33 +73,56 @@ router.get('/getCityWeather', function (req, res, next) {
 
 
 router.get('/register', function (req, res, next) {
-    console.log('Registration page requested');
-    res.render('registration', { title: 'Register @ CarboWeb' });
+    res.render('register', { title: 'CarboWeb - Register' });
 });
 
 router.post('/register', function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    console.log('Registration required, user: ' + username + ', psw: ' + password);
 
-    var newUser = new User({
-        username: username,
-        password: password
-    });
+    req.checkBody('username', 'Username must be at least 4 characters long.').notEmpty().len(4);
+    req.checkBody('password', 'Username must be at least 6 characters long.').notEmpty().len(6);
+    req.checkBody('human', 'Wrong answer here.').equals('7');
+    var errors = req.validationErrors(true);
+    if (errors) {
+        console.dir(errors);
+        res.render('register', { errors: errors, success: false });
+    } else {
+        console.log('Registration user: ' + username + ', psw: ' + password);
+        var newUser = new db.User({
+            username: username,
+            password: password
+        });
 
-    mongoose.Promise = global.Promise;
-    mongoose.connect(URLremote);
-    mongoose.connection.on('error', function (err) {
-        console.log('DB conn Error', err);
-        return;
-    });
-    mongoose.connection.on('open', function () {
         newUser.save(function (err, savedUsr) {
             if (err) return console.log(err);
-            console.log('User added to db');
-            mongoose.disconnect();
+            console.log('User added to db.');
+            res.render('register', { errors: null , success: true });
+        });
+
+    }
+
+   
+});
+
+router.get('/login', function (req, res, next) {
+    res.render('login', { title: 'CarboWeb - Login' });
+});
+
+router.post('/login', function (req, res, next) {
+    var username = req.body.username;
+    var password = req.body.password;
+    console.log('Log-in attempted by user: ' + username + ', psw: ' + password);
+
+    db.User.findOne({ username: username }, function (err, userDoc) {
+        if (err) return console.log(err);
+        userDoc.comparePasswords(password, function (err, isMatch) {
+            console.log(arguments);
+            if (err) return console.log(err);
+            req.session.auth = true;
         });
     });
+
 });
 
 module.exports = router;

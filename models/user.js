@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs'), SALT_WORK_FACTOR = 10; 
+
 var userSchema = new mongoose.Schema({
 	username: {type: String, index: true, unique: true, lowercase: true, trim: true}, 
     password: String

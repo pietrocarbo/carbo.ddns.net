@@ -5,9 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser'); // prima di validator e altri
 var validator = require('express-validator');
+var session = require('express-session');
+var hbs = require('express-handlebars');
 var routes = require('./routes/index');
 var app = express();
-var hbs = require('express-handlebars');
 
 app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'base', layoutsDir: path.join(__dirname, 'views')})); 
 app.set('view engine', 'hbs');
@@ -20,6 +21,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(validator());
+// saveUni:false create session only if something added to req.session
+// resave:false not force save session when unmodified
+app.use(session({ secret: 'Bevo Rocchetta e mi depuro, effetto Rocchetta!', resave: false, saveUninitialized: false }));
+
+app.use('/', function (req, res, next) {
+    console.log('%s : requested %s on %s', new Date().toLocaleString(), req.method, req.protocol + '://' + req.get('host') + req.originalUrl);
+    next();
+});
 
 app.use('/', routes);
 

@@ -3,6 +3,7 @@
 /// <reference path="globals/cookie-parser/index.d.ts" />
 /// <reference path="globals/debug/index.d.ts" />
 /// <reference path="globals/express-handlebars/index.d.ts" />
+/// <reference path="globals/express-session/index.d.ts" />
 /// <reference path="globals/express-validator/index.d.ts" />
 /// <reference path="globals/express/index.d.ts" />
 /// <reference path="globals/jade/index.d.ts" />

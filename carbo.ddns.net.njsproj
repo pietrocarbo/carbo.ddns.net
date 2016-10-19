@@ -6,18 +6,20 @@
     <ProjectGuid>{e6fa5393-9bba-4c71-b16d-ad9bbb83c993}</ProjectGuid>
     <ProjectHome>..\..\webdev\carbo.ddns.net\</ProjectHome>
     <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile>app.js</StartupFile>
+    <StartupFile>bin/www</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <StartWebBrowser>True</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="models\city.js" />
+    <Compile Include="models\db.js" />
     <Compile Include="models\user.js" />
     <Compile Include="routes\index.js" />
   </ItemGroup>
@@ -37,6 +39,7 @@
     <Folder Include="typings\globals\cookie-parser\" />
     <Folder Include="typings\globals\debug\" />
     <Folder Include="typings\globals\express-handlebars\" />
+    <Folder Include="typings\globals\express-session\" />
     <Folder Include="typings\globals\express-validator\" />
     <Folder Include="typings\globals\express\" />
     <Folder Include="typings\globals\jade\" />
@@ -55,6 +58,7 @@
     <TypeScriptCompile Include="typings\globals\cookie-parser\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\debug\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\express-handlebars\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\express-session\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\express-validator\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\express\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jade\index.d.ts" />

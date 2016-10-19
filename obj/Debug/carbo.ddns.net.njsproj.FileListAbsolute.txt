@@ -1,0 +1,2 @@
+C:\Users\Pietro\Documents\webdev\carbo.ddns.net\obj\Debug\carbo.ddns.net.njsprojResolveAssemblyReference.cache
+C:\Users\Pietro\Documents\webdev\carbo.ddns.net\bin\Microsoft.NodejsTools.WebRole.dll
