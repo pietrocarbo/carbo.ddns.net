@@ -1,91 +1,34 @@
 <!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar">Ciao</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Carbo Web</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
+<nav class="navbar navbar-inverse navbar-fixed-top">	
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">Carbo Web</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="/">Home</a></li>
+				<li><a href="/getCityWeather">Weather Forecast</a></li>
+				<li><a href="/boardGame">Board Game</a></li>
+				<li><a href="/contact">Contact</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    		</ul>
+        </div>
+	</div>
 </nav>
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-  <div class="container">
-    <h1>Weather Forecast</h1>
-    <p>This page will get you forecast for your specified city of next 5 days with intervals of 3 hours.</p>
-
-	<form action="/getCityWeather" method="get">
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">Email address</label>
-	    <input type="text" class="form-control" id="name" name="name" placeholder="New York, US">
-	  </div>
-	  <button type="submit" class="btn btn-success">Richiedi</button>
-	</form>
-  	
-  	<!-- {{#forecast}}
-	<ul>
-		<li>Orario: {{dt_txt}} <tab2>Condizione: {{weather.[0].description}}</tab2> <tab1>Temperatura: {{main.temp}}</tab1></li>
-	</ul>
-	{{/forecast}} -->
-
-	{{#if forecast}}
-		<br>
-		<div class="table-responsive">
-	  		<table class="table table-striped table-bordered table-hover">
-	    		<thead>
-	    			<tr>
-	    				<th>Time</th>
-	    				<th>Forecast</th>
-	    				<th>Temperature</th>
-	    			</tr>
-	    		</thead>
-	    		<tbody>
-	    			{{#forecast}}
-	    			<tr>
-	    				<td>{{dt_txt}}</td>
-	    				<td>{{weather.[0].description}}</td>
-	    				<td>{{main.temp}}</td>
-	    			</tr>
-	    			{{/forecast}}
-	    		</tbody>
-	  		</table>
-		</div>
-	{{/if}}
-
-  </div>
+<div class="page-header">
+	<h1>Where am I?</h1>
 </div>
-
-
-<!-- <form action="/getCityWeather" method="get">
-<input type="text" placeholder="New York, US" id="name" name="name">
-<button type="submit">Richiedi previsioni</button>
-{{#forecast}}
-<ul>
-	<li>Orario: {{dt_txt}} <tab2>Condizione: {{weather.[0].description}}</tab2> <tab1>Temperatura: {{main.temp}}</tab1></li>
-</ul>
-{{/forecast}}
-</form>
+<div class="well">
+	<p>Hi, this is an experimentation website. Availible operations can be found in the top navbar. Feel free to touch buttons and try things.</p>
+</div>
+<img src="/images/Abandon-Hope.jpg" alt="abandon-all-hope">

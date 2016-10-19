@@ -1,0 +1,65 @@
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+<div class="container">
+	<div class="navbar-header">
+	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	</button>
+	<a class="navbar-brand" href="/">Carbo Web</a>
+	</div>
+	<div id="navbar" class="navbar-collapse collapse">
+	<ul class="nav navbar-nav">
+		<li><a href="/">Home</a></li>
+		<li><a href="/getCityWeather">Weather Forecast</a></li>
+		<li><a href="/boardGame">Board Game</a></li>
+		<li><a href="/contact">Contact</a></li>
+	</ul>
+	</div> <!--/.nav-collapse -->
+</div>
+</nav>
+
+<form class="form-horizontal top17" role="form" method="post" action="/register">
+	<div class="form-group">
+		<label for="username" class="col-sm-2 control-label">Username</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" id="username" name="username" placeholder="" required>
+            <p class='text-danger'>{{errors.username.msg}}</p>
+		</div>
+	</div>
+    <div class="form-group">
+		<label for="password" class="col-sm-2 control-label">Password</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" id="password" name="password" placeholder="" required>
+            <p class='text-danger'>{{errors.password.msg}}</p>
+		</div>
+	</div>
+    <div class="form-group">
+		<label for="human" class="col-sm-2 control-label">4 + 3= ?</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" id="human" name="human" placeholder="Do the math to prove you are human" required pattern="9" >
+            <p class='text-danger'>{{errors.human.msg}}</p>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-5 col-sm-offset-2">
+			<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+			<input type="reset" class="btn btn-danger" value="Reset">
+        </div>
+	</div>
+    <div class="form-group">
+		<div class="col-sm-5 col-sm-offset-2">
+			<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+			<input type="reset" class="btn btn-danger" value="Reset">
+        </div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-6 col-sm-offset-2">
+			{{#if success}}
+                <p class='text-success'>Thanks for your registration. Your account is now active.</p>
+            {{/if}}
+		</div>
+	</div>
+</form>
