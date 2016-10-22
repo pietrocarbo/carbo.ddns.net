@@ -12,12 +12,12 @@ var db = require('../models/db');
 
 /* Display home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Carbo Web' });
+    res.render('index', { title: 'Carbo Web', pageName: 'home', authenticated: req.session.auth, userName: req.session.username });
 });
 
 /* Display contact page. */
 router.get('/contact', function (req, res, next) {
-    res.render('contact', { title: 'Carbo Web' });
+    res.render('contact', { title: 'Carbo Web', pageName: 'contact' });
 });
 
 /* Verify contact page. */
@@ -30,14 +30,14 @@ router.post('/contact', function (req, res, next) {
     var errors = req.validationErrors(true);
     if (errors) {
         console.dir(errors);
-        res.render('contact', { errors: errors, success: false });
+        res.render('contact', { errors: errors, success: false, pageName: 'contact' });
     } else {
         var contactData = '*\t*\t*\nName: ' + req.body.name + '\tEmail: ' + req.body.email + '\n' + req.body.message;
         fs.appendFile('contacts.txt', contactData, function (err) {
             if (err) throw err;
             console.log('Following text added to contact file:\n' + contactData);
         });
-        res.render('contact', { errors: errors, success: true });
+        res.render('contact', { errors: errors, success: true, pageName: 'contact' });
     }
     return;
 });
@@ -56,7 +56,7 @@ router.get('/getCityWeather', function (req, res, next) {
                 if (err) return;
 
                 if (!doc) {
-                    res.render('forecast', { title: 'Home - CarboWeb', forecast: null });
+                    res.render('forecast', { title: 'Home - CarboWeb', forecast: null, pageName: 'weather' });
                 } else {
                     console.log('Risultato query db: ' + doc.name + ' -> ' + doc.id);
                     requestWeatherbyID(doc.id, res);
@@ -65,7 +65,7 @@ router.get('/getCityWeather', function (req, res, next) {
             db.close();
         });
     } else {
-        res.render('forecast', { title: 'Home - CarboWeb', forecast: null });
+        res.render('forecast', { title: 'Home - CarboWeb', forecast: null, pageName: 'weather' });
 
     }
 
@@ -73,7 +73,7 @@ router.get('/getCityWeather', function (req, res, next) {
 
 
 router.get('/register', function (req, res, next) {
-    res.render('register', { title: 'CarboWeb - Register' });
+    res.render('register', { title: 'CarboWeb - Register', pageName: 'register' });
 });
 
 router.post('/register', function (req, res, next) {
@@ -81,7 +81,7 @@ router.post('/register', function (req, res, next) {
     var password = req.body.password;
 
     req.checkBody('username', 'Username must be at least 4 characters long.').notEmpty().len(4);
-    req.checkBody('password', 'Username must be at least 6 characters long.').notEmpty().len(6);
+    req.checkBody('password', 'Password must be at least 6 characters long.').notEmpty().len(6);
     req.checkBody('human', 'Wrong answer here.').equals('7');
     var errors = req.validationErrors(true);
     if (errors) {
@@ -106,7 +106,7 @@ router.post('/register', function (req, res, next) {
 });
 
 router.get('/login', function (req, res, next) {
-    res.render('login', { title: 'CarboWeb - Login' });
+    res.render('login', { title: 'CarboWeb - Login', pageName: 'login' });
 });
 
 router.post('/login', function (req, res, next) {
@@ -116,13 +116,21 @@ router.post('/login', function (req, res, next) {
 
     db.User.findOne({ username: username }, function (err, userDoc) {
         if (err) return console.log(err);
-        userDoc.comparePasswords(password, function (err, isMatch) {
+        userDoc.comparePasswords(password, function (err, isMatch) { // handle no username found
             console.log(arguments);
             if (err) return console.log(err);
             req.session.auth = true;
+            req.session.username = username;
+            console.log('Added session obj: ' + req.session);
+            res.redirect('/');
         });
     });
 
+});
+
+router.get('/logout', function (req, res, next) {
+    req.session.destroy();
+    res.redirect('/');
 });
 
 module.exports = router;
@@ -144,7 +152,7 @@ function requestWeatherbyID(cityID, res) {
             var weather = JSON.parse(body).list;
             for (var i in weather)
                 console.log(weather[i].weather);
-            res.render('forecast', { title: 'Home - CarboWeb', forecast: weather });
+            res.render('forecast', { title: 'Home - CarboWeb', forecast: weather, pageName: 'weather' });
         }
     });
     return;

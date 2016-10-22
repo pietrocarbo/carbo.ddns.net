@@ -6,13 +6,21 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser'); // prima di validator e altri
 var validator = require('express-validator');
 var session = require('express-session');
-var hbs = require('express-handlebars');
+var exphbs = require('express-handlebars');
+var hbsHelpers = require('./views/helpers');
 var routes = require('./routes/index');
 var app = express();
 
-app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'base', layoutsDir: path.join(__dirname, 'views')})); 
+var hbs = exphbs.create({
+    defaultLayout: 'base',
+    extname: '.hbs',
+    helpers: hbsHelpers,
+    layoutsDir: path.join(__dirname, 'views/')
+}); 
+
+app.engine('hbs', hbs.engine);  
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views/'));
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon(cw-black-bg).ico')));
 app.use(logger('dev'));

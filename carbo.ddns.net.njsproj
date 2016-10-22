@@ -21,7 +21,9 @@
     <Compile Include="models\city.js" />
     <Compile Include="models\db.js" />
     <Compile Include="models\user.js" />
+    <Compile Include="public\javascripts\jsClient.js" />
     <Compile Include="routes\index.js" />
+    <Compile Include="views\helpers.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin" />
@@ -32,9 +34,6 @@
     <Folder Include="public\javascripts" />
     <Folder Include="public\stylesheets" />
     <Folder Include="routes" />
-    <Folder Include="typings\" />
-    <Folder Include="typings\globals\" />
-    <Folder Include="typings\globals\bcryptjs\" />
     <Folder Include="typings\globals\body-parser\" />
     <Folder Include="typings\globals\cookie-parser\" />
     <Folder Include="typings\globals\debug\" />
@@ -53,7 +52,6 @@
     <Folder Include="views" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="typings\globals\bcryptjs\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\body-parser\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\cookie-parser\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\debug\index.d.ts" />
